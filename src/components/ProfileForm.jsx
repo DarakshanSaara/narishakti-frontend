@@ -6,7 +6,45 @@ import "./ProfileForm.css";
 
 const skillOptions = [
   { value: "React", label: "React" },
-  // ... (keep your existing skill options)
+  { value: "Content Writing", label: "Content Writing" },
+  // ... keep all your skill options
+];
+
+// Pre-defined mock data
+const MOCK_JOBS = [
+  {
+    id: 1,
+    jobTitle: "Frontend Developer",
+    company: "Tech Solutions Inc.",
+    location: "Remote",
+    skillsRequired: "React, JavaScript, CSS",
+    workType: "Full-time",
+    applyLink: "#",
+    matchScore: 92
+  },
+  {
+    id: 2,
+    jobTitle: "UX Designer",
+    company: "Creative Minds",
+    location: "Hybrid",
+    skillsRequired: "Figma, User Research",
+    workType: "Part-time",
+    applyLink: "#",
+    matchScore: 85
+  }
+];
+
+const MOCK_LEARNING = [
+  {
+    skill: "Advanced React",
+    reason: "Required for 80% of matched jobs",
+    resource: "#"
+  },
+  {
+    skill: "Career Networking",
+    reason: "Expand your professional connections",
+    resource: "#"
+  }
 ];
 
 export default function ProfileForm() {
@@ -28,90 +66,57 @@ export default function ProfileForm() {
     setFormData({ ...formData, skills: values });
   };
 
-  const handleSubmit = (e) => {
+  const handleShowOpportunities = (e) => {
     e.preventDefault();
-
     // Save to localStorage
-    localStorage.setItem("userName", formData.name);
-    localStorage.setItem("skills", formData.skills.join(","));
-    localStorage.setItem("interests", formData.interest);
-    localStorage.setItem("education", formData.background);
-    localStorage.setItem("availability", formData.availability);
-
-    // Generate realistic mock response
-    const mockJobs = generateMockJobs(formData.skills, formData.interest);
-    const mockLearningPath = generateLearningPath(formData.skills);
-
-    // Navigate with mock data
+    localStorage.setItem("userName", formData.name || "Demo User");
+    localStorage.setItem("skills", formData.skills.join(",") || "React,Design");
+    localStorage.setItem("interests", formData.interest || "Technology");
+    localStorage.setItem("education", formData.background || "Computer Science");
+    localStorage.setItem("availability", formData.availability || "Full-time");
+    
+    // Use pre-defined mock data
     navigate("/results", {
       state: {
-        matchedJobs: mockJobs,
-        learningPath: mockLearningPath,
-        userName: formData.name,
+        matchedJobs: MOCK_JOBS,
+        learningPath: MOCK_LEARNING,
+        userName: formData.name || "Demo User",
       },
     });
   };
 
-  // Mock data generators
-  const generateMockJobs = (skills, interest) => {
-    const baseJobs = [
-      {
-        id: 1,
-        jobTitle: `${skills[0] || interest || "Frontend"} Developer`,
-        company: "Tech Solutions Inc.",
-        location: "Remote",
-        skillsRequired: skills.join(", ") || "General skills",
-        workType: formData.availability || "Flexible",
-        applyLink: "#",
-        matchScore: Math.floor(Math.random() * 20) + 80, // 80-100% match
-      },
-      {
-        id: 2,
-        jobTitle: `${interest || "Digital"} Specialist`,
-        company: "Creative Minds Co.",
-        location: "Hybrid",
-        skillsRequired: skills.join(", ") || "Various skills",
-        workType: formData.availability || "Part-time",
-        applyLink: "#",
-        matchScore: Math.floor(Math.random() * 25) + 70, // 70-95% match
-      }
-    ];
-    return baseJobs;
-  };
-
-  const generateLearningPath = (skills) => {
-    if (skills.length === 0) return [];
-    return [
-      {
-        skill: `Advanced ${skills[0]}`,
-        reason: "Required for high-paying roles in this field",
-        resource: "#"
-      },
-      {
-        skill: "Career Networking",
-        reason: "Expand your professional connections",
-        resource: "#"
-      }
-    ];
+  const handleViewDashboard = () => {
+    // Ensure default values exist
+    localStorage.setItem("userName", formData.name || "Demo User");
+    navigate("/dashboard");
   };
 
   return (
     <div className="profile-page">
-      {/* ... (keep your existing JSX structure) */}
-      <button 
-        type="submit" 
-        className="submit-btn"
-        onClick={handleSubmit}
-      >
-        Show My Opportunities
-      </button>
-      <button 
-        type="button" 
-        onClick={() => navigate("/dashboard")} 
-        className="submit-btn"
-      >
-        View Progress Dashboard
-      </button>
+      <div className="profile-section">
+        <div className="image-side">
+          <img src="/assets/woman.svg" alt="Working Woman" className="profile-image" />
+        </div>
+        <div className="form-side">
+          <h2>Build Your Profile</h2>
+          <form onSubmit={handleShowOpportunities}>
+            {/* Keep all your existing form fields */}
+            <button 
+              type="submit" 
+              className="submit-btn"
+            >
+              Show My Opportunities
+            </button>
+            <button 
+              type="button" 
+              onClick={handleViewDashboard}
+              className="submit-btn"
+            >
+              View Progress Dashboard
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }
