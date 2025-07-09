@@ -1,0 +1,14 @@
+cd C:\Users\ASUS\OneDrive\WWT\career-restart-client
+@"
+# Frontend .gitignore
+node_modules/
+dist/
+.env
+.DS_Store
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.idea/
+.vscode/
+"@ | Out-File -FilePath .gitignore -Encoding UTF8

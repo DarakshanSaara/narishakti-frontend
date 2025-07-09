@@ -1,0 +1,93 @@
+.profile-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to right, #c897f0, #c8b8be);
+  position: relative;
+  overflow: hidden;
+  padding: 4rem;
+}
+
+.profile-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1400px;
+  width: 100%;
+  gap: 8rem;
+}
+
+.image-side {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 4rem;
+}
+
+.profile-image {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  animation: float 6s ease-in-out infinite;
+  margin-top: -60px;
+}
+
+.form-side {
+  flex: 1;
+  max-width: 600px;
+  background: white;
+  padding: 3rem 3.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.form-side h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+form input,
+form select {
+  width: 100%;
+  padding: 12px 16px;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+form label {
+  font-weight: 500;
+  margin: 0.5rem 0 0.3rem;
+  display: block;
+  color: #444;
+}
+
+.submit-btn {
+  background-color: #8e61db;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 14px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #7243c4;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}

@@ -1,0 +1,12 @@
+.dashboard-container {
+  padding: 2rem;
+}
+.job-card, .learn-card {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+select {
+  margin-top: 0.5rem;
+}

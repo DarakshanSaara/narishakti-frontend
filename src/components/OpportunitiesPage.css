@@ -1,0 +1,23 @@
+.opportunities-container {
+  padding: 2rem;
+  background: linear-gradient(to bottom right, #f0e9ff, #e6d4ff);
+  min-height: 100vh;
+}
+
+.back-btn {
+  background-color: #9257d0;
+  color: white;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.job-card {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
