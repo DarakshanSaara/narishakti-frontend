@@ -4,6 +4,15 @@ import Select from "react-select";
 import "../App.css";
 import "./ProfileForm.css";
 
+// Add this missing constant
+const skillOptions = [
+  { value: "React", label: "React" },
+  { value: "JavaScript", label: "JavaScript" },
+  { value: "UI/UX Design", label: "UI/UX Design" },
+  { value: "Content Writing", label: "Content Writing" },
+  { value: "Digital Marketing", label: "Digital Marketing" }
+];
+
 export default function ProfileForm() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -14,28 +23,35 @@ export default function ProfileForm() {
     skills: [],
   });
 
-  // Auto-fill demo (keep your existing implementation)
   const autoFillDemo = () => {
     setFormData({
       name: "Demo User",
-    background: "B.tech in Computer Science",
-    interest: "Frontend Development",
-    skills: ["React", "UI/UX Design"],
-    availability: "Full-time"
+      background: "B.Tech in Computer Science",
+      interest: "Frontend Development",
+      skills: ["React", "UI/UX Design"],
+      availability: "Full-time"
     });
   };
 
-  // Form submission
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    // Add basic validation
+    if (!formData.name || !formData.availability) {
+      alert("Please fill all required fields");
+      return;
+    }
+
     navigate("/results", {
       state: {
         matchedJobs: [{
-          jobTitle: "Sample Job",
+          jobTitle: formData.interest ? `${formData.interest} Role` : "Tech Role",
           company: "Sample Company",
-          matchScore: 85
+          matchScore: 85,
+          skills: formData.skills.join(", "),
+          type: formData.availability
         }],
-        userName: formData.name || "Demo User"
+        userName: formData.name
       }
     });
   };
@@ -49,53 +65,65 @@ export default function ProfileForm() {
         <div className="form-side">
           <h2>Build Your Profile</h2>
           
-          {/* FORM INPUTS - THESE WERE MISSING */}
           <form onSubmit={handleSubmit}>
-            <input
-              name="name"
-              value={formData.name}
-              onChange={(e) => setFormData({...formData, name: e.target.value})}
-              placeholder="Your Name"
-              required
-            />
+            <div className="form-group">
+              <input
+                name="name"
+                value={formData.name}
+                onChange={(e) => setFormData({...formData, name: e.target.value})}
+                placeholder="Your Name *"
+                required
+              />
+            </div>
             
-            <input
-              name="background"
-              value={formData.background}
-              onChange={(e) => setFormData({...formData, background: e.target.value})}
-              placeholder="Education/Work Background"
-              required
-            />
+            <div className="form-group">
+              <input
+                name="background"
+                value={formData.background}
+                onChange={(e) => setFormData({...formData, background: e.target.value})}
+                placeholder="Education/Work Background *"
+                required
+              />
+            </div>
             
-            <input
-              name="interest"
-              value={formData.interest}
-              onChange={(e) => setFormData({...formData, interest: e.target.value})}
-              placeholder="Career Interests"
-              required
-            />
+            <div className="form-group">
+              <input
+                name="interest"
+                value={formData.interest}
+                onChange={(e) => setFormData({...formData, interest: e.target.value})}
+                placeholder="Career Interests *"
+                required
+              />
+            </div>
             
-            <Select
-              isMulti
-              options={skillOptions}
-              onChange={(selected) => 
-                setFormData({...formData, skills: selected.map(opt => opt.value)})
-              }
-              placeholder="Select Skills"
-              className="skill-select"
-            />
+            <div className="form-group">
+              <label>Skills *</label>
+              <Select
+                isMulti
+                options={skillOptions}
+                value={skillOptions.filter(opt => formData.skills.includes(opt.value))}
+                onChange={(selected) => 
+                  setFormData({...formData, skills: selected.map(opt => opt.value)})
+                }
+                className="skill-select"
+                placeholder="Select your skills..."
+              />
+            </div>
             
-            <select
-              name="availability"
-              value={formData.availability}
-              onChange={(e) => setFormData({...formData, availability: e.target.value})}
-              required
-            >
-              <option value="">Select Availability</option>
-              <option value="Full-time">Full-time</option>
-              <option value="Part-time">Part-time</option>
-              <option value="Freelance">Freelance</option>
-            </select>
+            <div className="form-group">
+              <label>Availability *</label>
+              <select
+                name="availability"
+                value={formData.availability}
+                onChange={(e) => setFormData({...formData, availability: e.target.value})}
+                required
+              >
+                <option value="">Select Availability</option>
+                <option value="Full-time">Full-time</option>
+                <option value="Part-time">Part-time</option>
+                <option value="Freelance">Freelance</option>
+              </select>
+            </div>
             
             <button type="submit" className="submit-btn">
               Show My Opportunities
@@ -108,7 +136,7 @@ export default function ProfileForm() {
           
           <button 
             onClick={() => navigate("/dashboard")} 
-            className="submit-btn"
+            className="dashboard-btn"
           >
             View Progress Dashboard
           </button>
