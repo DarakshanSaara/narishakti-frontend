@@ -1,3 +1,15 @@
+/* Makes inputs visible */
+.profile-page input, 
+.profile-page select {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  margin: 10px 0;
+}
+
+.skill-select {
+  margin: 10px 0;
+}
 .profile-page {
   min-height: 100vh;
   display: flex;
