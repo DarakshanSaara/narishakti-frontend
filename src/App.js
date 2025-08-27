@@ -22,7 +22,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProfileForm from "./components/ProfileForm";
 import ResultsPage from "./components/ResultsPage";
 import Dashboard from "./components/Dashboard";
-import Health from "./components/Health";
+import Health from "./pages/api/Health";
 import "./App.css";
 
 const MOCK_JOBS = [
