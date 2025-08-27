@@ -22,6 +22,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProfileForm from "./components/ProfileForm";
 import ResultsPage from "./components/ResultsPage";
 import Dashboard from "./components/Dashboard";
+import Health from "./components/Health";
 import "./App.css";
 
 const MOCK_JOBS = [
@@ -68,6 +69,7 @@ function App() {
           path="/dashboard" 
           element={<Dashboard progress={MOCK_PROGRESS} />} 
         />
+        <Route path="/health" element={<Health />} />
       </Routes>
     </Router>
   );
